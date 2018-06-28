@@ -14,9 +14,6 @@
   "DHTConfig": {
     "HashType": "sha2-256"
   },
-  "BasedOn": {
-      "H": null
-  },
   "Zomes": [
   {
       "Name": "anchor",

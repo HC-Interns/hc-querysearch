@@ -25,7 +25,7 @@ function addAnchor()
   var anchor_main_hash=commit("anchor",anchor_main);
   //debug("Entered addAnchor - main hash - "+anchor_main_hash);
   commit("anchor_links", {Links:[{Base:dna,Link:anchor_main_hash,Tag:"Anchor"}]});
-  var lnk = getLink(dna,"Anchor",{Load : true});
+  var lnk = getLinks(dna,"Anchor",{Load : true});
   //debug("Main anchor hash on link - "+lnk);
   return lnk.Links[0].H;
 }
