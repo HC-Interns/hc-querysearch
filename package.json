@@ -2,12 +2,9 @@
   "name": "holodex",
   "version": "1.0.0",
   "description": "Holochain application indexing engine for distributed apps which run on holochains",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "copyfiles --flat ./src/dna/*.json ./build/dna && "
   },
   "repository": {
     "type": "git",
@@ -20,6 +17,9 @@
   },
   "homepage": "https://github.com/HC-Interns/holodex#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0"
-  }
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "copyfiles": "^2.0.0"
+  },
+  "dependencies": {}
 }
