@@ -60,13 +60,13 @@
 
       "Functions": [
         {
-          "Name": "indexContent",
+          "Name": "index",
           "CallingType": "json",
           "Exposure": "public"
         },
         {
-          "Name": "searchKeywords",
-          "CallingType": "string",
+          "Name": "search",
+          "CallingType": "json",
           "Exposure": "public"
         }
       ]
