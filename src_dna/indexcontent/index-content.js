@@ -1,31 +1,3 @@
-"use strict";
-
-function genesis() {
-
-  //Calling addAnchor function for creating the base anchor
-  baseAnchorHash = call("anchor", "addAnchor", "");
-  debug("Base anchor added with hash - " + baseAnchorHash);
-
-  var ContentToIndex1 = {
-    content: "holodex : We are Indexing this content using holodex app. this",
-    details: "can include timestamp, etc."
-  };
-
-  ContentToIndexhash1 = makeHash("anchor", ContentToIndex1);
-
-  var ContentToIndex2 = {
-    content: "holodex can also be used for searching keywords",
-    details: "can include timestamp,lication, etc."
-  };
-
-  ContentToIndexhash2 = makeHash("anchor", ContentToIndex2);
-
-  //called in genesis temporarily. Once bridging between apps gets workig, index content will be called from the HC app that is
-  //using holodex
-  IndexContent(ContentToIndex1.content, ContentToIndexhash1, "English");
-  IndexContent(ContentToIndex2.content, ContentToIndexhash2, "English");
-  return true;
-}
 
 //Function called by the HC app to search for a string of words and get all the objects indexed for the words.
 function searchKeywords(searchString) {
@@ -139,32 +111,3 @@ function getkeyword(keyword, hashOfObject) {
   return sources;
 }
 
-//This is the list of common words(stop words) which do not need to Indexed for search. This list needs to be enhanced to cover all
-//possible ignore words
-function getIgnoreWords(language) {
-  var IWreturn = {};
-  debug("Entered IW return function !");
-  IWreturn = loadIW(language);
-
-  return IWreturn;
-}
-
-function loadIW(language) {
-  debug("Inside load IW !");
-  var ignoreList = loadignoreWords(language);
-  debug("Value of variable ignoreList is : " + ignoreList);
-  var ignoreListarr = ignoreList.split(" ");
-  var IgnoreWords = {};
-
-  for (var i = 0; i < ignoreListarr.length; i++) {
-    IgnoreWords[ignoreListarr[i]] = true;
-  }
-  return IgnoreWords;
-}
-
-function loadignoreWords(language) {
-
-  if (language == "English") ignoreList = "this This the is a an are and to be we : -";else if (language == "Hindi") ignoreList = "ये हिंदी उपेक्षा शब्द हैं";else if (language == German) ignoreList = "Diese sind Deutsch ignorieren Worte";else if (language == Japanese) ignoreList = "これらは日本語を無視する";
-
-  return ignoreList;
-}
