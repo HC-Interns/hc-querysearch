@@ -89,7 +89,7 @@ function union(mergedList,listH)
 
 //Index content function is called from a HC application by passing the content and the hash of the object so that the link cant be
 //made directly to the object.
-function IndexContent(content,hashOfObject,language)
+function indexContent(content,hashOfObject,language)
 {
 
 
@@ -206,3 +206,26 @@ function loadignoreWords(language)
 
     return ignoreList;
 }
+
+
+/*==================================
+=            Anchor API            =
+==================================*/
+
+function anchor(anchorType, anchorText) {
+  return call('anchors', 'anchor', {
+    anchorType: anchorType,
+    anchorText: anchorText
+  }).replace(/"/g, '');
+}
+
+
+function anchorExists(anchorType, anchorText) {
+  return call('anchors', 'exists', {
+    anchorType: anchorType,
+    anchorText: anchorText
+  });
+}
+
+/*=====  End of Anchor API  ======*/
+
