@@ -1,0 +1,25 @@
+{
+  "name": "holodex",
+  "version": "1.0.0",
+  "description": "Holochain application indexing engine for distributed apps which run on holochains",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HC-Interns/holodex.git"
+  },
+  "author": "Holo Interns 2018",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HC-Interns/holodex/issues"
+  },
+  "homepage": "https://github.com/HC-Interns/holodex#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
