@@ -56,8 +56,6 @@
       "Description": "Generic indexing functions provision",
       "RibosomeType": "js",
       "CodeFile": "indexcontent.js",
-      
-
       "Functions": [
         {
           "Name": "index",

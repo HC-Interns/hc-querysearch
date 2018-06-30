@@ -1,3 +1,8 @@
+/*=================================
+=            Callbacks            =
+=================================*/
+
+
 function genesis() {
   return true;
 }
@@ -45,3 +50,5 @@ function validateLinkPkg(entry_type) {
   //
   return null;
 }
+
+/*=====  End of Callbacks  ======*/
