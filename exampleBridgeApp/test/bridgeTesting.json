@@ -26,6 +26,15 @@
         "Input" : {"entryType" : "record", "entryHash" : "%h%", "entry" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}}},
         "Output": true,
         "Exposure":"public"
+    },
+    {
+        "Convey":"Can call bridged search with keyword that was in the body",
+        "Zome": "consumer",
+        "FnName": "bridgeSearch",
+        "Raw" : true,
+        "Input" : "bridgeSearch({entryType : 'record', queryString : 'text'})[%result1%]",
+        "Output": 1,
+        "Exposure":"public"
     }
   ]
 }
