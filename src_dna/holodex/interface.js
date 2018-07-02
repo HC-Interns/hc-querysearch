@@ -10,8 +10,6 @@ function index({entryType, entryHash}) {
   let entryFlat = flattenObject(entry);
   debug(entryFlat)
 
-
-
   // index each of the fields that need indexing
   indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
 
@@ -52,7 +50,7 @@ function search({entryType, queryString, options={}}) {
         getLinks(keywordAnchorHash, '').forEach(({Hash}) => {
           // add a new result entry or increment the weight
           if(results[Hash]) {
-            result[Hash] += weight;
+            results[Hash] += weight;
           } else {
             results[Hash] = weight;
           }

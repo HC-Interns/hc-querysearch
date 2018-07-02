@@ -4,7 +4,7 @@
             "Convey":"Can create a new record in the consumer zome",
             "Zome": "consumer",
             "FnName": "addRecord",
-            "Input" : {"title" : "a new record", "body" : {"text" : "this is the body text"}},
+            "Input" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}},
             "Output": "%h%",
             "Exposure":"public"
         },
@@ -27,12 +27,30 @@
             "Exposure":"public"
         },
         {
-            "Convey":"Can call search with a useful keyword and retrieve the record",
+            "Convey":"Can call search with keyword that was in the body",
             "Zome": "holodex",
             "FnName": "search",
             "Raw" : true,
-            "Input" : "search({entryType : 'record', queryString : 'body'})[%result0%]",
+            "Input" : "search({entryType : 'record', queryString : 'text'})[%result0%]",
             "Output": 1,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call search with keyword that was in the title",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Raw" : true,
+            "Input" : "search({entryType : 'record', queryString : 'new'})[%result0%]",
+            "Output": 2,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call search with keyword that is in both. Weight is the sum",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Raw" : true,
+            "Input" : "search({entryType : 'record', queryString : 'record'})[%result0%]",
+            "Output": 3,
             "Exposure":"public"
         }
     ]
