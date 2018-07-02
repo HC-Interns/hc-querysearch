@@ -21,7 +21,7 @@ function removeStopWords(tokens) {
   // app author configuration
   let stopwords = ['the', 'is'];
 
-  return tokens.filter(x => !stopwords.indexOf(x));
+  return tokens.filter(x => !(stopwords.indexOf(x) > -1));
 }
 
 

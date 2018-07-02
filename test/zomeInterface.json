@@ -15,6 +15,25 @@
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
             "Exposure":"public"
+        },
+
+
+        {
+            "Convey":"Can call search with no useful keywords",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Input" : {"entryType" : "record", "queryString" : "q x z"},
+            "Output": {},
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call search with a useful keyword and retrieve the record",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Raw" : true,
+            "Input" : "search({entryType : 'record', queryString : 'body'})[%result0%]",
+            "Output": 1,
+            "Exposure":"public"
         }
     ]
 }

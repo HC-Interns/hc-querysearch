@@ -17,3 +17,8 @@ var flattenObject = function(ob) {
   }
   return toReturn;
 };
+
+
+function hashExists(hash) {
+  return get(hash) !== null;
+}
