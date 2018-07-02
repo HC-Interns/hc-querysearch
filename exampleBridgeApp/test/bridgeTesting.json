@@ -23,7 +23,7 @@
         "Convey":"Can call index on the resulting hash via bridging",
         "Zome": "consumer",
         "FnName": "bridgeIndex",
-        "Input" : {"entryType" : "record", "entryHash" : "%h%"},
+        "Input" : {"entryType" : "record", "entryHash" : "%h%", "entry" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}}},
         "Output": true,
         "Exposure":"public"
     }

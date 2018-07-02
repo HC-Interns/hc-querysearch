@@ -11,21 +11,21 @@ function addRecord(record) {
 function bridgeIndex(payload) {
   debug(getBridges()[0].CalleeApp);
   debug(payload);
-  return bridge(
+  return JSON.parse(bridge(
     getBridges()[0].CalleeApp,
     "holodex",
     "index",
     payload
-  );
+  ));
 }
 
 function bridgeSearch(payload) {
-  return bridge(
+  return JSON.parse(bridge(
     getBridges()[0].CalleeApp,
     "holodex",
     "search",
     payload
-  );
+  ));
 }
 
 
