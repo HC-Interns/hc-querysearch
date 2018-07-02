@@ -14,48 +14,10 @@
   },
   "Zomes": [
     {
-      "Name": "anchors",
-      "Description": "anchors mixin",
-      "RibosomeType": "js",
-      "CodeFile": "anchors.js",
-      "Config": {
-        "ErrorHandling": "throwErrors"
-      },
-      "Entries": [
-        {
-          "Name": "anchor",
-          "DataFormat": "json",
-          "SchemaFile": "anchor.json",
-          "Sharing": "public"
-        },
-        {
-          "Name": "anchor_link",
-          "DataFormat": "links"
-        }
-      ],
-      "Functions": [
-        {
-          "Name": "anchor",
-          "CallingType": "json",
-          "Exposure": "public"
-        },
-        {
-          "Name": "exists",
-          "CallingType": "json",
-          "Exposure": "public"
-        },
-        {
-          "Name": "anchors",
-          "CallingType": "string",
-          "Exposure": "public"
-        }
-      ]
-    },
-    {
-      "Name": "indexcontent",
+      "Name": "holodex",
       "Description": "Generic indexing functions provision",
       "RibosomeType": "js",
-      "CodeFile": "indexcontent.js",
+      "CodeFile": "holodex.js",
       "Config": {
         "ErrorHandling": "throwErrors"
       },
@@ -82,6 +44,24 @@
           "Name" : "keywordLinks",
           "DataFormat" : "Links",
           "Sharing" : "public"
+        }
+      ]
+    },
+    {
+      "Name": "consumer",
+      "Description": "Example zome consuming holodex",
+      "RibosomeType": "js",
+      "CodeFile": "consumer.js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
+      },
+      "Functions": [],
+      "Entries" : [
+        {
+          "Name": "record",
+          "DataFormat": "json",
+          "SchemaFile": "record.json",
+          "Sharing": "public"
         }
       ]
     }

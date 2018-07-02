@@ -4,7 +4,7 @@
     "properties" : {
         "keyword" : {"type" : "string"},
         "entryType" : {"type" : "string"},
-        "field" : {"type" : "string"}
+        "fieldName" : {"type" : "string"}
     },
     "required" : ["keyword", "entryType", "field"]
 }

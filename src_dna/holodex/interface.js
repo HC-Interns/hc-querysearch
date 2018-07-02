@@ -9,13 +9,13 @@ function index({entryType, entryHash}) {
   let entryFlat = flattenObject(entry);
 
   // index each of the fields that need indexing
-  indexSpec[entryType].forEach(field => {
+  indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
     processString(entryFlat[field]).forEach(keyword => {
 
       // create a new anchor if it doesn't exist already
-      let keywordAnchorHash = commit('keywordAnchor' {
+      let keywordAnchorHash = commit('keywordAnchor', {
         entryType,
-        field,
+        fieldName,
         keyword
       });
 
@@ -26,12 +26,29 @@ function index({entryType, entryHash}) {
 
     });
   });
-
-
-
 }
 
+
+
 function search({entryType, queryString, options={}}) {
+  // results is a dictionary mapping hashes to ranks
+  let results = {};
+
+  processString(queryString).forEach(keyword => {
+    indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
+      let keywordAnchorHash =  ('keywordAnchor', {entryType, fieldName, keyword});
+      getLinks(keywordAnchorHash).forEach(({Hash}) => {
+        // add a new result entry or increment the weight
+        if(results[Hash]) {
+          result[Hash] += weight;
+        } else {
+          result[Hash] = weight;
+        }
+      });
+    });
+  });
+
+  return results;
 
 }
 

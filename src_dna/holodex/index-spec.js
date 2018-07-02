@@ -1,7 +1,7 @@
 // this should be moved to dna app properties
 
 const indexSpec = {
-    tweet : 
+    record : 
     {
         indexFields: [
             {fieldName: "title", weight: 2.0}, 
