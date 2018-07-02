@@ -52,6 +52,41 @@
             "Input" : "search({entryType : 'record', queryString : 'record'})[%result0%]",
             "Output": 3,
             "Exposure":"public"
+        },
+
+        {
+            "Convey":"Can create a new record that shares keywords with the first",
+            "Zome": "consumer",
+            "FnName": "addRecord",
+            "Input" : {"title" : "a second record", "body" : {"text" : "this is the second record body text"}},
+            "Output": "%h%",
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call index on the resulting hash",
+            "Zome": "holodex",
+            "FnName": "index",
+            "Input" : {"entryType" : "record", "entryHash" : "%h%"},
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call search with that is only in the second entry",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Raw" : true,
+            "Input" : "Object.keys(search({entryType : 'record', queryString : 'second'})).length",
+            "Output": 1,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call search with keywords in both. Returns both",
+            "Zome": "holodex",
+            "FnName": "search",
+            "Raw" : true,
+            "Input" : "Object.keys(search({entryType : 'record', queryString : 'record'})).length",
+            "Output": 2,
+            "Exposure":"public"
         }
     ]
 }
