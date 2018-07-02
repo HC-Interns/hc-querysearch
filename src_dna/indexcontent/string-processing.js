@@ -1,17 +1,17 @@
 /*=========================================
 =            String Processing            =
 =========================================*/
-// function relate to convering a string to a 
+// functions related to convering a string to a 
 // series of tokens for indexing or querying
 
 function tidy(str) {
-  return str.trim().toLowerCase();
+  return JSON.stringify(str).replace(/[^\w\s]/gi, '').trim().toLowerCase();
 }
 
 
 function tokenize(str) {
   // this will do for now but actually should be much smarter
-  return new Set(str.split(" "));
+  return new Set(str.split(/[ ]+/));
 }
 
 
@@ -39,11 +39,11 @@ const processString = (str) => pipeline.reduce((val, fn) => fn(val), str);
 
 /*=====  End of String Processing  ======*/
 
-// export for unit testing in node
-module.exports = {
-    tidy: tidy,
-    tokenize: tokenize,
-    removeStopWords: removeStopWords,
-    stem: stem,
-    processString: processString
-};
+// // export for unit testing in node
+// module.exports = {
+//     tidy: tidy,
+//     tokenize: tokenize,
+//     removeStopWords: removeStopWords,
+//     stem: stem,
+//     processString: processString
+// };

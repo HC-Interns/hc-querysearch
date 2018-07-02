@@ -67,6 +67,19 @@
           "CallingType": "json",
           "Exposure": "public"
         }
+      ],
+      "Entries" : [
+        {
+          "Name": "keywordAnchhor",
+          "DataFormat": "json",
+          "SchemaFile": "keywordAnchor.json",
+          "Sharing": "public"
+        },
+        {
+          "Name" : "keywordLinks",
+          "DataFormat" : "Links",
+          "Sharing" : "public"
+        }
       ]
     }
   ]
