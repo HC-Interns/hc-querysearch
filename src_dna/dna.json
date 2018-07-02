@@ -35,14 +35,14 @@
       ],
       "Entries" : [
         {
-          "Name": "keywordAnchhor",
+          "Name": "keywordAnchor",
           "DataFormat": "json",
           "SchemaFile": "keywordAnchor.json",
           "Sharing": "public"
         },
         {
           "Name" : "keywordLinks",
-          "DataFormat" : "Links",
+          "DataFormat" : "links",
           "Sharing" : "public"
         }
       ]
@@ -55,7 +55,13 @@
       "Config": {
         "ErrorHandling": "throwErrors"
       },
-      "Functions": [],
+      "Functions": [
+        {
+          "Name": "addRecord",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ],
       "Entries" : [
         {
           "Name": "record",

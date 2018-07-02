@@ -6,8 +6,7 @@
     "body" : {
       "type" : "object",
       "properties" : {
-        "text" : {"type" : "string"},
-        "tags" : {"type" : "string"}
+        "text" : {"type" : "string"}
       }
     }
   }

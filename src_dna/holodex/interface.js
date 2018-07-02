@@ -5,12 +5,17 @@
 
 function index({entryType, entryHash}) {
   // load the entry (will have to call over bridge in bridging case)
-  let entry = get(entryType, entryHash);
+  debug(entryType)
+  debug(entryHash)
+
+  let entry = get(entryHash);
   let entryFlat = flattenObject(entry);
+
+  debug(entry);
 
   // index each of the fields that need indexing
   indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
-    processString(entryFlat[field]).forEach(keyword => {
+    processString(entryFlat[fieldName]).forEach(keyword => {
 
       // create a new anchor if it doesn't exist already
       let keywordAnchorHash = commit('keywordAnchor', {
@@ -26,6 +31,8 @@ function index({entryType, entryHash}) {
 
     });
   });
+
+  return true;
 }
 
 

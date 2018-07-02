@@ -1,4 +1,4 @@
-const sp = require('../src_dna/indexcontent/string-processing'),
+const sp = require('../src_dna/holodex/string-processing'),
       test = require('tape')
 
 // tests for tidy
@@ -25,13 +25,13 @@ test('tidy removes non-alphanumeric symbols', function (t) {
 
 test('tokenize can split words delimited by a single space', function (t) {
     let o = sp.tokenize("these are test words");
-    t.deepEqual(o, new Set(["these", "are", "test", "words"]));
+    t.deepEqual(o, ["these", "are", "test", "words"]);
     t.end()
 });
 
 test('tokenize can split words delimited with multiple spaces', function (t) {
     let o = sp.tokenize("these         are test words");
-    t.deepEqual([...o], ["these", "are", "test", "words"]);
+    t.deepEqual(o, ["these", "are", "test", "words"]);
     t.end()
 });
 

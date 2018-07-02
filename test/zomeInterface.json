@@ -1,0 +1,20 @@
+{
+    "Tests":[
+        {
+            "Convey":"Can create a new record in the consumer zome",
+            "Zome": "consumer",
+            "FnName": "addRecord",
+            "Input" : {"title" : "a new record", "body" : {"text" : "this is the body text"}},
+            "Output": "%h%",
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call index on the resulting hash",
+            "Zome": "holodex",
+            "FnName": "index",
+            "Input" : {"entryType" : "record", "entryHash" : "%h%"},
+            "Output": true,
+            "Exposure":"public"
+        }
+    ]
+}

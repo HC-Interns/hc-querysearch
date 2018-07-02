@@ -11,7 +11,7 @@ function tidy(str) {
 
 function tokenize(str) {
   // this will do for now but actually should be much smarter
-  return new Set(str.split(/[ ]+/));
+  return str.split(/[ ]+/);
 }
 
 
@@ -19,10 +19,9 @@ function removeStopWords(tokens) {
   // return the set of tokens without stopwords
   // keeping it super simple for now but need to add support for multi-language and
   // app author configuration
-  let stopwords = new Set(['the', 'is']);
+  let stopwords = ['the', 'is'];
 
-  return new Set(
-    [...tokens].filter(x => !stopwords.has(x)));
+  return tokens.filter(x => !stopwords.indexOf(x));
 }
 
 
@@ -39,11 +38,14 @@ const processString = (str) => pipeline.reduce((val, fn) => fn(val), str);
 
 /*=====  End of String Processing  ======*/
 
-// // export for unit testing in node
-// module.exports = {
-//     tidy: tidy,
-//     tokenize: tokenize,
-//     removeStopWords: removeStopWords,
-//     stem: stem,
-//     processString: processString
-// };
+// export for unit testing in node
+
+if(typeof module !== 'undefined') {
+  module.exports = {
+    tidy: tidy,
+    tokenize: tokenize,
+    removeStopWords: removeStopWords,
+    stem: stem,
+    processString: processString
+  };
+}
