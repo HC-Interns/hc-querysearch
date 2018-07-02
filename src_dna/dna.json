@@ -56,6 +56,9 @@
       "Description": "Generic indexing functions provision",
       "RibosomeType": "js",
       "CodeFile": "indexcontent.js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
+      },
       "Functions": [
         {
           "Name": "index",

@@ -1,11 +1,11 @@
 // this should be moved to dna app properties
 
-const indexSpec = [
+const indexSpec = {
+    tweet : 
     {
-        entryType: "tweet",
         indexFields: [
-            {fieldName: "title", weight: 1.0}, 
-            {fieldName: "body.text", weight: 1.5}
+            {fieldName: "title", weight: 2.0}, 
+            {fieldName: "body.text", weight: 1.0}
         ]
     }
-]
+};
