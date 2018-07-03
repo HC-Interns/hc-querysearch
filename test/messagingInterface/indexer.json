@@ -1,0 +1,13 @@
+{
+    "Tests":[
+    {
+        "Time" : 500,
+        "Convey":"Can create a new record in the consumer zome",
+        "Zome": "consumer",
+        "FnName": "addRecord",
+        "Input" : {"title" : "unidexed record", "body" : {"text" : "this record will not be indexed"}},
+        "Output": "%h%",
+        "Exposure":"public"
+    }
+  ]
+}

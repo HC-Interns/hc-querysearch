@@ -31,6 +31,16 @@
           "Name": "search",
           "CallingType": "json",
           "Exposure": "public"
+        },
+        {
+          "Name": "messageIndex",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "messageSearch",
+          "CallingType": "json",
+          "Exposure": "public"
         }
       ],
       "BridgeFuncs": [

@@ -13,6 +13,9 @@
  * @return     {Object}  - Returns result of call if valid or an error string
  */
 function receive(from, msg) {
+
+  debug("message received!");
+
   switch(msg.call) {
     case 'index':
       return index(msg.payload);
@@ -27,4 +30,12 @@ function receive(from, msg) {
 
 /*=====  End of Messaging Callbacks  ======*/
 
+// publicly exposed message interface calls
 
+function messageIndex({to, payload}) {
+  return JSON.parse(send(to, {call : 'index', payload : payload}));
+}
+
+function messageSearch({to, payload}) {
+  return JSON.parse(send(to, {call : 'search', payload : payload}));
+}
