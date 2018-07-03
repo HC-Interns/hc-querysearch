@@ -3,12 +3,10 @@
 =            Public Functions            =
 ========================================*/
 
-function index({entryType, entryHash}) {
+function index({entryType, entryHash, entry=get(entryHash)}) {
   // load the entry (will have to call over bridge in bridging case)
 
-  let entry = get(entryHash);
   let entryFlat = flattenObject(entry);
-  debug(entryFlat)
 
   // index each of the fields that need indexing
   indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {

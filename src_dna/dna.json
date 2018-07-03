@@ -33,6 +33,10 @@
           "Exposure": "public"
         }
       ],
+      "BridgeFuncs": [
+        "index",
+        "search"
+      ],
       "Entries" : [
         {
           "Name": "keywordAnchor",
@@ -58,6 +62,11 @@
       "Functions": [
         {
           "Name": "addRecord",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "addRecordAndIndex",
           "CallingType": "json",
           "Exposure": "public"
         }
