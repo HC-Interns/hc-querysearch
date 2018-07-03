@@ -33,6 +33,10 @@
           "Exposure": "public"
         }
       ],
+      "BridgeFuncs": [
+        "index",
+        "search"
+      ],
       "Entries" : [
         {
           "Name": "keywordAnchor",

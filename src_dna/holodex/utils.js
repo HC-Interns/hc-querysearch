@@ -1,4 +1,4 @@
-var flattenObject = function(ob) {
+function flattenObject(ob) {
   var toReturn = {};
   
   for (var i in ob) {
@@ -16,7 +16,7 @@ var flattenObject = function(ob) {
     }
   }
   return toReturn;
-};
+}
 
 
 function hashExists(hash) {
