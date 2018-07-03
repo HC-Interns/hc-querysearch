@@ -64,6 +64,11 @@
           "Name": "addRecord",
           "CallingType": "json",
           "Exposure": "public"
+        },
+        {
+          "Name": "addRecordAndIndex",
+          "CallingType": "json",
+          "Exposure": "public"
         }
       ],
       "Entries" : [
