@@ -1,0 +1,22 @@
+{
+  "Tests":[
+    {
+        "Time" : 1000,
+        "Convey":"Can create a new record in the consumer zome",
+        "Zome": "consumer",
+        "FnName": "addRecord",
+        "Input" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}},
+        "Output": "%h%",
+        "Exposure":"public"
+    },
+    {
+        "Time" : 1800,
+        "Convey":"Can call index on the resulting hash",
+        "Zome": "consumer",
+        "FnName": "messageIndex",
+        "Input" : {"to" : "%indexer_key%", "payload" : {"entryType" : "record", "entryHash" : "%h%", "entry" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}}}},
+        "Output": "true",
+        "Exposure":"public"
+    }
+  ]
+}

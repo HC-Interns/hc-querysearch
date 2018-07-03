@@ -36,6 +36,16 @@
           "Name": "bridgeSearch",
           "CallingType": "json",
           "Exposure": "public"
+        },
+        {
+          "Name": "messageIndex",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "messageSearch",
+          "CallingType": "json",
+          "Exposure": "public"
         }
       ],
       "Entries" : [
