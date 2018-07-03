@@ -17,16 +17,17 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
 
       debug("linking to: "+keyword);
 
-      // create a new anchor if it doesn't exist already
-      let keywordAnchorHash = commit('keywordAnchor', {
-        entryType,
-        fieldName,
-        keyword
-      });
+      // // create a new anchor if it doesn't exist already
+      // let keywordAnchorHash = commit('keywordAnchor', {
+      //   entryType,
+      //   fieldName,
+      //   keyword
+      // });
 
       // link this entry
+      debug("linking with tag: "+entryType+"/"+fieldName+"/"+keyword);
       commit('keywordLinks', {
-        Links: [{ Base: keywordAnchorHash, Link: entryHash, Tag: '' }]
+        Links: [{ Base: App.DNA.Hash, Link: entryHash, Tag: entryType+"/"+fieldName+"/"+keyword }]
       });
 
     });
@@ -43,9 +44,11 @@ function search({entryType, queryString, options={}}) {
 
   processString(queryString).forEach(keyword => {
     indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
-      let keywordAnchorHash =  makeHash('keywordAnchor', {entryType, fieldName, keyword});
-      if (hashExists(keywordAnchorHash)) {
-        getLinks(keywordAnchorHash, '').forEach(({Hash}) => {
+
+      // let keywordAnchorHash =  makeHash('keywordAnchor', {entryType, fieldName, keyword});
+        debug("calling getLinks with tag: "+entryType+"/"+fieldName+"/"+keyword);
+
+        getLinks(App.DNA.Hash, entryType+"/"+fieldName+"/"+keyword).forEach(({Hash}) => {
           // add a new result entry or increment the weight
           if(results[Hash]) {
             results[Hash] += weight;
@@ -53,7 +56,7 @@ function search({entryType, queryString, options={}}) {
             results[Hash] = weight;
           }
         });
-      }
+
     });
   });
 

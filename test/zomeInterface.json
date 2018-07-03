@@ -4,7 +4,7 @@
             "Convey":"Can create a new record in the consumer zome",
             "Zome": "consumer",
             "FnName": "addRecord",
-            "Input" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}},
+            "Input" : {"title" : "a new record title", "body" : {"text" : "this is the record body text"}},
             "Output": "%h%",
             "Exposure":"public"
         },
@@ -40,7 +40,7 @@
             "Zome": "holodex",
             "FnName": "search",
             "Raw" : true,
-            "Input" : "search({entryType : 'record', queryString : 'new'})[%result0%]",
+            "Input" : "search({entryType : 'record', queryString : 'title'})[%result0%]",
             "Output": 2,
             "Exposure":"public"
         },
@@ -58,7 +58,7 @@
             "Convey":"Can create a new record that shares keywords with the first",
             "Zome": "consumer",
             "FnName": "addRecord",
-            "Input" : {"title" : "a second record", "body" : {"text" : "this is the second record body text"}},
+            "Input" : {"title" : "a second record", "body" : {"text" : "this is the second bloody record body text"}},
             "Output": "%h%",
             "Exposure":"public"
         },
@@ -75,7 +75,7 @@
             "Zome": "holodex",
             "FnName": "search",
             "Raw" : true,
-            "Input" : "Object.keys(search({entryType : 'record', queryString : 'second'})).length",
+            "Input" : "Object.keys(search({entryType : 'record', queryString : 'bloody'})).length",
             "Output": 1,
             "Exposure":"public"
         },
