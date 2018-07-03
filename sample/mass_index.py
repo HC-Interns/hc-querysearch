@@ -1,6 +1,8 @@
 import json
+import sys
 
 import requests
+
 
 API_BASE = 'http://localhost:4141'
 ENDPOINT_ADD = API_BASE + '/fn/consumer/addRecord'
@@ -36,7 +38,9 @@ def add_comment(c, i):
 def parse_sample_data():
     with open('sample_data.json', 'r') as f:
         for i, line in enumerate(f):
-            if i % 1 == 0: print('.')
+            if i % 100 == 0: print(i)
+            print('.', end='')
+            sys.stdout.flush()
             c = json.loads(line)
             add_comment(c, i)
 
