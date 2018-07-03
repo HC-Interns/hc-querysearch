@@ -19,8 +19,6 @@ function removeStopWords(tokens) {
   // return the set of tokens without stopwords
   // keeping it super simple for now but need to add support for multi-language and
   // app author configuration
-  let stopwords = ['the', 'is'];
-
   return tokens.filter(x => !(stopwords.indexOf(x) > -1));
 }
 
