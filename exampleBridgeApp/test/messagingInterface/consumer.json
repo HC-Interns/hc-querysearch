@@ -17,6 +17,15 @@
         "Input" : {"to" : "%indexer_key%", "payload" : {"entryType" : "record", "entryHash" : "%h%", "entry" : {"title" : "a new record", "body" : {"text" : "this is the record body text"}}}},
         "Output": "true",
         "Exposure":"public"
+    },
+    {
+        "Time" : 2400,
+        "Convey":"Can call search with keyword that was in the body",
+        "Zome": "consumer",
+        "FnName": "messageSearch",
+        "Input" : {"to": "%indexer_key%", "payload" : {"entryType" : "record", "queryString" : "text"}},
+        "Output": "{\"QmRXETZATVZKJWZB19xx41BUftyKW3kGt6B8PBGoWxyWuB\":1}",
+        "Exposure":"public"
     }
   ]
 }
