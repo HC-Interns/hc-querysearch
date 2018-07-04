@@ -16,8 +16,8 @@ function tokenize(str) {
 
 
 function stem(tokens) {
-  let stemmer = Stemmer();
-  return tokens.forEach(word => stemmer.stemWord);
+  let stemmer = new Stemmer();
+  return tokens.map(word => stemmer.stemWord(word));
 }
 
 
@@ -40,6 +40,8 @@ const processString = (str) => pipeline.reduce((val, fn) => fn(val), str);
 // export for unit testing in node
 
 if(typeof module !== 'undefined') {
+
+
   module.exports = {
     tidy: tidy,
     tokenize: tokenize,
