@@ -15,6 +15,12 @@ function tokenize(str) {
 }
 
 
+function stem(tokens) {
+  let stemmer = Stemmer();
+  return tokens.forEach(word => stemmer.stemWord);
+}
+
+
 function removeStopWords(tokens) {
   // return the set of tokens without stopwords
   // keeping it super simple for now but need to add support for multi-language and
@@ -23,12 +29,7 @@ function removeStopWords(tokens) {
 }
 
 
-function stem(tokens) {
-  return tokens; //passthrough until a stemming framework can be found
-}
-
-
-const pipeline = [tidy, tokenize, removeStopWords, stem];
+const pipeline = [tidy, tokenize, stem, removeStopWords];
 
 // call process in a string to return a set containing the index tokens
 const processString = (str) => pipeline.reduce((val, fn) => fn(val), str);
