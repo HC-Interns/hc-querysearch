@@ -40,8 +40,6 @@ const processString = (str) => pipeline.reduce((val, fn) => fn(val), str);
 // export for unit testing in node
 
 if(typeof module !== 'undefined') {
-
-
   module.exports = {
     tidy: tidy,
     tokenize: tokenize,

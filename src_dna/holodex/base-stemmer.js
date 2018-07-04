@@ -295,3 +295,7 @@ function BaseStemmer() {
     };
 };
 
+// for node unit tests only. Can be deleted for production
+if(typeof module !== 'undefined') {
+  module.exports = BaseStemmer;
+}
