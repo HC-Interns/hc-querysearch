@@ -51,6 +51,51 @@
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {GT : 5}}}).indexOf(%result0%) > -1",
             "Output": true,
             "Exposure":"public"
+        },
+
+        {
+            "Convey":"Can create another record ",
+            "Zome": "consumer",
+            "FnName": "addRecord",
+            "Input" : {"title" : "a second record title", "body" : {"text" : "this is the record body text"}, "upvotes" : 10},
+            "Output": "%h%",
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can index the new record",
+            "Zome": "holodex",
+            "FnName": "index",
+            "Input" : {"entryType" : "record", "entryHash" : "%h%"},
+            "Output": true,
+            "Exposure":"public"
+        },
+
+        {
+            "Convey":"Can match exactly one result using equality query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {EQ : 14}}}).length === 1",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match multiple result using less than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {LT : 20}}}).length === 2",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match multiple result using greater than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {GT : 2}}}).length === 2",
+            "Output": true,
+            "Exposure":"public"
         }
     ]
 }
