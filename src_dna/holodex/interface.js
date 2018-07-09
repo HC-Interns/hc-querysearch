@@ -37,17 +37,17 @@ function search({entryType, queryString, options={}}) {
 
   processString(queryString).forEach(keyword => {
     indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
-      let keywordAnchorHash =  makeHash('keywordAnchor', {entryType, fieldName, keyword});
-      if (hashExists(keywordAnchorHash)) {
-        getLinks(keywordAnchorHash, '').forEach(({Hash}) => {
-          // add a new result entry or increment the weight
-          if(results[Hash]) {
-            results[Hash] += weight;
-          } else {
-            results[Hash] = weight;
-          }
-        });
-      }
+      queryDHT('keywordAnchor', {
+        Field: 'keyword', 
+        Constrain: {EQ : entryType + ":" + fieldName + ":" + keyword}
+      }).forEach((Hash) => {
+        debug(Hash)
+        if(results[Hash]) {
+          results[Hash] += weight;
+        } else {
+          results[Hash] = weight;
+        }
+      });
     });
   });
 
