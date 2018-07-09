@@ -7,6 +7,9 @@
 		},
 		"language": {
 			"type": "string"
-		}
+		},
+    "textSearchSpec" : {
+      "type" : "string"
+    }
 	}
 }

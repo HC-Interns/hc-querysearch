@@ -5,7 +5,8 @@
 
   "Properties": {
     "description": "A pluggable app for other holochain based apps for enabling indexing",
-    "language": "en"
+    "language": "en",
+    "textSearchSpec" : "{\"record\" : {\"indexFields\": [{\"fieldName\": \"title\", \"weight\": 2.0}, {\"fieldName\": \"body.text\", \"weight\": 1.0}]}}"
   },
 
   "PropertiesSchemaFile": "properties_schema.json",

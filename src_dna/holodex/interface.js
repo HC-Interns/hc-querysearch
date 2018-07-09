@@ -9,7 +9,7 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
   let entryFlat = flattenObject(entry);
 
   // index each of the fields that need indexing
-  indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
+  JSON.parse(property("textSearchSpec"))[entryType].indexFields.forEach(({fieldName, weight}) => {
 
     debug("Extracted Keywords:" + JSON.stringify(processString(entryFlat[fieldName])));
 
@@ -29,14 +29,21 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
   return true;
 }
 
+function queryHD({entryType, queryOptions}) {
+  // get the corresponding skeleton entry type
 
+
+  return queryDHT(skeletonEntryType, queryOptions).map(Hash => {
+    return get(Hash).sourceEntryHash;
+  })
+}
 
 function search({entryType, queryString, options={}}) {
   // results is a dictionary mapping hashes to ranks
   let results = {};
 
   processString(queryString).forEach(keyword => {
-    indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
+    JSON.parse(property("textSearchSpec"))[entryType].indexFields.forEach(({fieldName, weight}) => {
       queryDHT('keywordAnchor', {
         Field: 'keyword', 
         Constrain: {EQ : entryType + ":" + fieldName + ":" + keyword}
