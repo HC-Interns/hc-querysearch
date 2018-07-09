@@ -1,12 +1,14 @@
 
+import * as utils from './utils'
+
 /*========================================
 =            Public Functions            =
 ========================================*/
 
-function index({entryType, entryHash, entry=get(entryHash)}) {
+export function index({entryType, entryHash, entry=get(entryHash)}) {
   // load the entry (will have to call over bridge in bridging case)
 
-  let entryFlat = flattenObject(entry);
+  let entryFlat = utils.flattenObject(entry);
 
   // index each of the fields that need indexing
   indexSpec[entryType].indexFields.forEach(({fieldName, weight}) => {
@@ -37,7 +39,7 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
 
 
 
-function search({entryType, queryString, options={}}) {
+export function search({entryType, queryString, options={}}) {
   // results is a dictionary mapping hashes to ranks
   let results = {};
 

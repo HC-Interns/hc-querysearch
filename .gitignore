@@ -1,6 +1,5 @@
 
-ui/
-Build/
+dna-tmp/*.js
 node_modules/
 package-lock.json
 .dist/

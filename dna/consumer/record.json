@@ -9,5 +9,9 @@
         "text" : {"type" : "string"}
       }
     }
-  }
+  },
+  "holodexIndexFields" : [{"title": 1}, {"text.body" : -1}],
+  "holodexKeywordIndexFields" : [
+    {"fieldPath" : "title", "weight" : 33.3 }, 
+    {"text.body" : 1.0}]
 }
