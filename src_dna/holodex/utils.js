@@ -20,5 +20,10 @@ function flattenObject(ob) {
 
 
 function hashExists(hash) {
-  return get(hash) !== null;
+  try {
+    get(hash)
+    return true
+  } catch (err) {
+    return false
+  }
 }

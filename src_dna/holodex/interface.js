@@ -41,11 +41,13 @@ function search({entryType, queryString, options={}}) {
         Field: 'keyword', 
         Constrain: {EQ : entryType + ":" + fieldName + ":" + keyword}
       }).forEach((Hash) => {
-        debug(Hash)
-        if(results[Hash]) {
-          results[Hash] += weight;
-        } else {
-          results[Hash] = weight;
+        if (hashExists(Hash)) {
+          let entryHash = get(Hash).sourceEntryHash
+          if(results[entryHash]) {
+            results[entryHash] += weight;
+          } else {
+            results[entryHash] = weight;
+          }
         }
       });
     });
