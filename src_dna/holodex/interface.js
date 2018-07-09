@@ -19,14 +19,8 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
 
       // create a new anchor if it doesn't exist already
       let keywordAnchorHash = commit('keywordAnchor', {
-        entryType,
-        fieldName,
-        keyword
-      });
-
-      // link this entry
-      commit('keywordLinks', {
-        Links: [{ Base: keywordAnchorHash, Link: entryHash, Tag: '' }]
+        sourceEntryHash: entryHash,
+        keyword : entryType + ":" + fieldName + ":" + keyword
       });
 
     });

@@ -3,8 +3,8 @@
     "type" : "object",
     "properties" : {
         "keyword" : {"type" : "string"},
-        "entryType" : {"type" : "string"},
-        "fieldName" : {"type" : "string"}
+        "sourceEntryHash" : {"type" : "string"}
     },
-    "required" : ["keyword", "entryType", "field"]
+    "required" : ["keyword", "sourceEntryHash"],
+    "indexFields" : [{"keyword" : 1}]
 }
