@@ -46,8 +46,10 @@ function queryHD({entryType, queryOptions}) {
   let skeletonEntryType = "skel_"+entryType
 
   return queryDHT(skeletonEntryType, queryOptions).map(Hash => {
-    return get(Hash).sourceEntryHash;
-  })
+    if (hashExists(Hash)) {
+      return get(Hash).sourceEntryHash;
+    }
+  }).filter(elem=>elem); // filter out null elements
 }
 
 function search({entryType, queryString, options={}}) {

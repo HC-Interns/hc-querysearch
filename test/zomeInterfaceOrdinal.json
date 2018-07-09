@@ -15,6 +15,42 @@
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
             "Exposure":"public"
+        },
+
+        {
+            "Convey":"Can call queryHD with a query that returns nothing",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Input" : {"entryType" : "record", "queryOptions" : {"Field" : "upvotes", "Constrain" : {"EQ" : 3}}},
+            "Output": [],
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using equality query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {EQ : 14}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using less than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {LT : 20}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using greater than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {GT : 5}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
         }
     ]
 }
