@@ -1,24 +1,25 @@
-export function flattenObject(ob) {
-  var toReturn = {};
-  
+'use strict'
+
+export function flattenObject (ob) {
+  var toReturn = {}
+
   for (var i in ob) {
-    if (!ob.hasOwnProperty(i)) continue;
-    
-    if ((typeof ob[i]) == 'object') {
-      var flatObject = flattenObject(ob[i]);
+    if (!ob.hasOwnProperty(i)) continue
+
+    if ((typeof ob[i]) === 'object') {
+      var flatObject = flattenObject(ob[i])
       for (var x in flatObject) {
-        if (!flatObject.hasOwnProperty(x)) continue;
-        
-        toReturn[i + '.' + x] = flatObject[x];
+        if (!flatObject.hasOwnProperty(x)) continue
+
+        toReturn[i + '.' + x] = flatObject[x]
       }
     } else {
-      toReturn[i] = ob[i];
+      toReturn[i] = ob[i]
     }
   }
-  return toReturn;
+  return toReturn
 }
 
-
-export function hashExists(hash) {
-  return get(hash) !== null;
+export function hashExists (hash) {
+  return get(hash) !== null
 }
