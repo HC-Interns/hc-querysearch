@@ -9,7 +9,7 @@ function indexKeyword({entryType, entryHash, entry=get(entryHash)}) {
   let entryFlat = flattenObject(entry);
 
   // index each of the fields that need indexing
-  JSON.parse(property("textSearchSpec"))[entryType].indexFields.forEach(({fieldName, weight}) => {
+  textSearchSpec()[entryType].indexFields.forEach(({fieldName, weight}) => {
 
     debug("Extracted Keywords:" + JSON.stringify(processString(entryFlat[fieldName])));
 
@@ -29,6 +29,18 @@ function indexKeyword({entryType, entryHash, entry=get(entryHash)}) {
   return true;
 }
 
+function index({entryType, entryHash, entry=get(entryHash)}) {
+  //create a skeletal entry with the correct fields plus the hash of the original
+  let skeletalEntryType = "skel_"+entryType
+  let skeletalEntry = indexSpec()[entryType].reduce((obj, field) => {
+    obj[field] = entry[field]
+    return obj
+  }, {})
+  skeletalEntry.sourceEntryHash = entryHash
+  commit(skeletalEntryType, skeletalEntry)
+  return true
+}
+
 function queryHD({entryType, queryOptions}) {
   // get the corresponding skeleton entry type
   let skeletonEntryType = "skel_"+entryType
@@ -43,7 +55,7 @@ function search({entryType, queryString, options={}}) {
   let results = {};
 
   processString(queryString).forEach(keyword => {
-    JSON.parse(property("textSearchSpec"))[entryType].indexFields.forEach(({fieldName, weight}) => {
+    textSearchSpec()[entryType].indexFields.forEach(({fieldName, weight}) => {
       queryDHT('keywordAnchor', {
         Field: 'keyword', 
         Constrain: {EQ : entryType + ":" + fieldName + ":" + keyword}

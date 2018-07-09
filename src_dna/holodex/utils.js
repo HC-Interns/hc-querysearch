@@ -27,3 +27,11 @@ function hashExists(hash) {
     return false
   }
 }
+
+function textSearchSpec() {
+  return JSON.parse(property("textSearchSpec"))
+}
+
+function indexSpec() {
+  return JSON.parse(property("indexSpec"))
+}

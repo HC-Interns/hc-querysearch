@@ -9,7 +9,7 @@
             "Exposure":"public"
         },
         {
-            "Convey":"Can call index on the resulting hash",
+            "Convey":"Can call indexKeyword on the resulting hash",
             "Zome": "holodex",
             "FnName": "indexKeyword",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},

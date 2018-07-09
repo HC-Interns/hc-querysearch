@@ -5,7 +5,8 @@
   "Properties": {
     "description": "A pluggable app for other holochain based apps for enabling indexing",
     "language": "en",
-    "textSearchSpec" : "{\"record\" : {\"indexFields\": [{\"fieldName\": \"title\", \"weight\": 2.0}, {\"fieldName\": \"body.text\", \"weight\": 1.0}]}}"
+    "textSearchSpec" : "{\"record\" : {\"indexFields\": [{\"fieldName\": \"title\", \"weight\": 2.0}, {\"fieldName\": \"body.text\", \"weight\": 1.0}]}}",
+    "indexSpec" : "{\"record\" : [\"upvotes\"]}"
   },
   "PropertiesSchemaFile": "properties_schema.json",
   "DHTConfig": {
@@ -27,6 +28,11 @@
           "Exposure": "public"
         },
         {
+          "Name": "index",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
           "Name": "search",
           "CallingType": "json",
           "Exposure": "public"
@@ -44,9 +50,10 @@
           "Sharing": "public"
         },
         {
-          "Name" : "keywordLinks",
-          "DataFormat" : "links",
-          "Sharing" : "public"
+          "Name": "skel_record",
+          "DataFormat": "json",
+          "SchemaFile": "skel_record.json",
+          "Sharing": "public"
         }
       ]
     },
