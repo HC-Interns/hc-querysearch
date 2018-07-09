@@ -3,7 +3,7 @@
 =            Public Functions            =
 ========================================*/
 
-function index({entryType, entryHash, entry=get(entryHash)}) {
+function indexKeyword({entryType, entryHash, entry=get(entryHash)}) {
   // load the entry (will have to call over bridge in bridging case)
 
   let entryFlat = flattenObject(entry);
@@ -31,7 +31,7 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
 
 function queryHD({entryType, queryOptions}) {
   // get the corresponding skeleton entry type
-
+  let skeletonEntryType = "skel_"+entryType
 
   return queryDHT(skeletonEntryType, queryOptions).map(Hash => {
     return get(Hash).sourceEntryHash;

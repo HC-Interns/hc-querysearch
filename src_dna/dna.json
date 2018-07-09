@@ -2,13 +2,11 @@
   "Version": 1,
   "UUID": "2ef9fa48-2a33-424f-a4bf-b0591b2a71d8",
   "Name": "holodex",
-
   "Properties": {
     "description": "A pluggable app for other holochain based apps for enabling indexing",
     "language": "en",
     "textSearchSpec" : "{\"record\" : {\"indexFields\": [{\"fieldName\": \"title\", \"weight\": 2.0}, {\"fieldName\": \"body.text\", \"weight\": 1.0}]}}"
   },
-
   "PropertiesSchemaFile": "properties_schema.json",
   "DHTConfig": {
     "HashType": "sha2-256"
@@ -24,7 +22,7 @@
       },
       "Functions": [
         {
-          "Name": "index",
+          "Name": "indexKeyword",
           "CallingType": "json",
           "Exposure": "public"
         },
@@ -35,7 +33,7 @@
         }
       ],
       "BridgeFuncs": [
-        "index",
+        "indexKeyword",
         "search"
       ],
       "Entries" : [

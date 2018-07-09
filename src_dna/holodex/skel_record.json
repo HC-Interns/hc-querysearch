@@ -1,0 +1,15 @@
+{
+  "name" : "skel_record",
+  "type" : "object",
+  "properties" : {
+    "title" : {"type" : "string"},
+    "body" : {
+      "type" : "object",
+      "properties" : {
+        "text" : {"type" : "string"}
+      }
+    },
+    "upvotes" : {"type" : "integer"}
+  },
+  "indexFields" : [{"upvotes" : 1}]
+}

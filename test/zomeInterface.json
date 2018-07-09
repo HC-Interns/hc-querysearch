@@ -11,7 +11,7 @@
         {
             "Convey":"Can call index on the resulting hash",
             "Zome": "holodex",
-            "FnName": "index",
+            "FnName": "indexKeyword",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
             "Exposure":"public"
@@ -65,7 +65,7 @@
         {
             "Convey":"Can call index on the resulting hash",
             "Zome": "holodex",
-            "FnName": "index",
+            "FnName": "indexKeyword",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
             "Exposure":"public"
