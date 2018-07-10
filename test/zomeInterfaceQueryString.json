@@ -1,0 +1,56 @@
+{
+    "Tests":[
+        {
+            "Convey":"Can create a new record in the consumer zome",
+            "Zome": "consumer",
+            "FnName": "addRecord",
+            "Input" : {"title" : "a new record title", "body" : {"text" : "body!"}, "upvotes" : 14},
+            "Output": "%h%",
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can call index on the resulting hash",
+            "Zome": "holodex",
+            "FnName": "index",
+            "Input" : {"entryType" : "record", "entryHash" : "%h%"},
+            "Output": true,
+            "Exposure":"public"
+        },
+
+        {
+            "Convey":"Can call queryHD with a query that returns nothing",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Input" : {"entryType" : "record", "queryOptions" : {"Field" : "body.text", "Constrain" : {"EQ" : "not a match"}}},
+            "Output": [],
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using equality query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'body.text', Constrain : {EQ : 'body!'}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using less than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'body.text', Constrain : {LT : 'zody!'}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
+        },
+        {
+            "Convey":"Can match result using greater than query",
+            "Zome": "holodex",
+            "FnName": "queryHD",
+            "Raw" : true,
+            "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'body.text', Constrain : {GT : 'aody!'}}}).indexOf(%result0%) > -1",
+            "Output": true,
+            "Exposure":"public"
+        }
+    ]
+}

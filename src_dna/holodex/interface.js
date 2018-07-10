@@ -31,9 +31,10 @@ function indexKeyword({entryType, entryHash, entry=get(entryHash)}) {
 
 function index({entryType, entryHash, entry=get(entryHash)}) {
   //create a skeletal entry with the correct fields plus the hash of the original
+  let entryFlat = flattenObject(entry);
   let skeletalEntryType = "skel_"+entryType
   let skeletalEntry = indexSpec()[entryType].reduce((obj, field) => {
-    obj[field] = entry[field]
+    obj[field.replace('.','_')] = entryFlat[field]
     return obj
   }, {})
   skeletalEntry.sourceEntryHash = entryHash
@@ -44,6 +45,8 @@ function index({entryType, entryHash, entry=get(entryHash)}) {
 function queryHD({entryType, queryOptions}) {
   // get the corresponding skeleton entry type
   let skeletonEntryType = "skel_"+entryType
+
+  queryOptions.Field = queryOptions.Field.replace('.','_')
 
   return queryDHT(skeletonEntryType, queryOptions).map(Hash => {
     if (hashExists(Hash)) {
