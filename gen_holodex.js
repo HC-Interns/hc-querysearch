@@ -28,6 +28,15 @@ function loadDNA(appPath) {
   return JSON.parse(fs.readFileSync(filePath[0]));
 }
 
+// function for using strings like 'body.text.title' to access object properties
+function getWithStringPath(obj, path) {
+  return path.split('.').reduce(function (obj,i) {return obj[i]}, obj)
+}
+
+function followStringPathInSchema(schema, path) {
+  return getWithStringPath(schema, 'properties.'+path.replace('.', '.properties.'))
+}
+
 function genSkeletalSchema(schema) {
   // find the ordinal index fields and create a new schema with only those entries
   let skelSchema = {
@@ -40,7 +49,13 @@ function genSkeletalSchema(schema) {
   let indexFields = schema.holodexIndexFields || []
   indexFields.forEach(fieldSpec => {
     if (fieldSpec.type === "ordinal") {
-      skelSchema.properties[fieldSpec.field] = schema.properties[fieldSpec.field]
+      // add this field flattened to the skeletal schemad
+      let flatField = fieldSpec.field.replace('.', '_')
+      skelSchema.properties[flatField] = followStringPathInSchema(schema, fieldSpec.field)
+      // add an entry in the indexFields
+      let indexFieldEntry = {}
+      indexFieldEntry[flatField] = fieldSpec.ascending?1:-1
+      skelSchema.indexFields.push(indexFieldEntry)
     }
   })
   return skelSchema

@@ -11,6 +11,7 @@
     }
   },
   "holodexIndexFields" : [
-    {"field" : "title", "type" : "ordinal", "ascending" : true}
+    {"field" : "title", "type" : "ordinal", "ascending" : true},
+    {"field" : "body.text", "type" : "ordinal", "ascending" : true}
   ]
 }
