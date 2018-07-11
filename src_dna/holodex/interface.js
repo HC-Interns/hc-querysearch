@@ -47,10 +47,13 @@ function queryHD({entryType, queryOptions}) {
   let skeletonEntryType = "skel_"+entryType
 
   queryOptions.Field = queryOptions.Field.replace('.','_')
+  queryOptions.Load = true
 
-  return queryDHT(skeletonEntryType, queryOptions).map(Hash => {
-    if (hashExists(Hash)) {
-      return get(Hash).sourceEntryHash;
+  return queryDHT(skeletonEntryType, queryOptions).map(elem => {
+    if (elem && elem.Entry) {
+      return elem.Entry.sourceEntryHash;
+    } else {
+      return null
     }
   }).filter(elem=>elem); // filter out null elements
 }
