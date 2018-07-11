@@ -9,5 +9,8 @@
         "text" : {"type" : "string"}
       }
     }
-  }
+  },
+  "holodexIndexFields" : [
+    {"field" : "title", "type" : "ordinal", "ascending" : true}
+  ]
 }

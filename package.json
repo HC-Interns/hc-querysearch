@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Holochain application indexing engine for distributed apps which run on holochains",
   "scripts": {
-    "test": "cd build && hcdev test",
+    "test": "cd build && hcdev test; cd ..",
     "build": "./build.sh"
   },
   "repository": {
