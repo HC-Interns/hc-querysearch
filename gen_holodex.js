@@ -40,7 +40,7 @@ function followStringPathInSchema(schema, path) {
 function genSkeletalSchema(schema) {
   // find the ordinal index fields and create a new schema with only those entries
   let skelSchema = {
-    name : schema.name,
+    name : 'skel_'+schema.name,
     type: "object",
     properties: {},
     indexFields: []
@@ -61,15 +61,58 @@ function genSkeletalSchema(schema) {
   return skelSchema
 }
 
+function genTextSearchSpec(schemas) {
+  let specs = {}
+  schemas.forEach(schema => {
+    specs[schema.name] = {fields: []}
+    let indexFields = schema.holodexIndexFields || []
+    indexFields.forEach(fieldSpec => {
+      if(fieldSpec.type === 'textSearch') {
+        specs[schema.name].fields.push({
+          fieldName: fieldSpec.field,
+          weight: fieldSpec.weight
+        })
+      }
+    })
+  })
+  return specs
+}
+
+function genIndexSpec(schemas) {
+  let specs = {}
+  schemas.forEach(schema => {
+    specs[schema.name] = []
+    let indexFields = schema.holodexIndexFields || []
+    indexFields.forEach(fieldSpec => {
+      if(fieldSpec.type === 'ordinal') {
+        specs[schema.name].push(fieldSpec.field)
+      }
+    })
+  })
+  return specs
+}
+
+// takes a list of all schemas in an app and adds some properties to the properties object
+function AddHolodexDNAProperties(properties, AppUUID, schemas) {
+  properties['forUUIID'] = AppUUID
+  properties['textSearchSpec'] = genTextSearchSpec(schemas)
+  properties['indexSpec'] = genIndexSpec(schemas)
+  return properties
+}
+
 const appRoot = './exampleBridgeApp'
 dna = loadDNA(appRoot);
+let schemas = []
 
 dna.Zomes.forEach(zome => {
   zome.Entries.forEach(entry => {
     if (entry.SchemaFile) {
       let schema = JSON.parse(fs.readFileSync(appRoot+'/dna/'+zome.Name+'/'+entry.SchemaFile))
+      schemas.push(schema)
       let skelSchema = genSkeletalSchema(schema)
       console.log(skelSchema)
     }
   })
 })
+
+console.log(JSON.stringify(AddHolodexDNAProperties({}, 'xxx', schemas)))

@@ -8,6 +8,9 @@
 		"language": {
 			"type": "string"
 		},
+    "forUUIID" : {
+      "type" : "string"
+    },
     "textSearchSpec" : {
       "type" : "string"
     },

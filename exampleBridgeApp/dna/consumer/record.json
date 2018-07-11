@@ -12,6 +12,7 @@
   },
   "holodexIndexFields" : [
     {"field" : "title", "type" : "ordinal", "ascending" : true},
-    {"field" : "body.text", "type" : "ordinal", "ascending" : true}
+    {"field" : "body.text", "type" : "ordinal", "ascending" : true},
+    {"field" : "body.text", "type" : "textSearch", "weight" : 1.0}
   ]
 }
