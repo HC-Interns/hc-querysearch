@@ -24,6 +24,7 @@ function genSkeletalSchema(schema) {
   let indexFields = schema.holodexIndexFields || []
   indexFields.forEach(fieldSpec => {
     if (fieldSpec.type === "ordinal") {
+      console.log("Generating skeleton schema for "+schema.name)
       // add this field flattened to the skeletal schemad
       let flatField = fieldSpec.field.replace('.', '_')
       skelSchema.properties[flatField] = followStringPathInSchema(schema, fieldSpec.field)
@@ -43,6 +44,7 @@ function genTextSearchSpec(schemas) {
     let indexFields = schema.holodexIndexFields || []
     indexFields.forEach(fieldSpec => {
       if(fieldSpec.type === 'textSearch') {
+        console.log('Generating keyword search for '+schema.name+'.'+fieldSpec.field)
         specs[schema.name].fields.push({
           fieldName: fieldSpec.field,
           weight: fieldSpec.weight
@@ -67,24 +69,25 @@ function genIndexSpec(schemas) {
   return specs
 }
 
-// takes a list of all schemas in an app and adds some properties to the properties object
-function AddHolodexDNAProperties(properties, AppUUID, schemas) {
-  properties['textSearchSpec'] = genTextSearchSpec(schemas)
-  properties['indexSpec'] = genIndexSpec(schemas)
-  return properties
-}
-
-
 
 
 ////// Script steps (zome style!) Script must be run from app root dir (one that contains dna dir)
 
-
+// check there is not already a holodex directory in dna
+if (fs.existsSync('./dna/holodex')) {
+  console.error('Holodex directory already present in dna! Delete it if you wish to reinstall. Aborting')
+  process.exit(1)
+}
 
 
 // get an instance of Holodex zome edition from github (placeholder for now)
 downloadGitRepo('github:HC-Interns/holodex#template', './dna/', function (err) {
-  console.log(err ? 'Error downloading template from repo' : 'Success')
+  if(err) {
+    console.error('Could not download repo. Check https://github.com/HC-Interns/holodex for details')
+    process.exit(1)
+  } else {
+    console.log('successfully downloaded repo')
+  }
 
 
   // // load the existing app DNA
@@ -93,6 +96,7 @@ downloadGitRepo('github:HC-Interns/holodex#template', './dna/', function (err) {
   // generate the objects for the skeleton entries and things to be added to the DNA
   let schemas = []
   appDNA.Zomes.forEach(zome => {
+    if (zome.Name === 'holodex') { return }
     zome.Entries.forEach(entry => {
       if (entry.SchemaFile) {
         let schema = JSON.parse(fs.readFileSync('./dna/'+zome.Name+'/'+entry.SchemaFile))
@@ -102,16 +106,11 @@ downloadGitRepo('github:HC-Interns/holodex#template', './dna/', function (err) {
   })
 
   let skeletonSchemas = schemas.map(genSkeletalSchema)
-  console.log(JSON.stringify(skeletonSchemas))
-
-  let textSearchSpec = genTextSearchSpec(schemas)
-  let indexSpec = genIndexSpec(schemas)
-
 
   //// update dna json
   // write the new stuff to properties
-  appDNA.Properties['textSearchSpec'] = genTextSearchSpec(schemas)
-  appDNA.Properties['indexSpec'] = genIndexSpec(schemas)
+  appDNA.Properties['textSearchSpec'] = JSON.stringify(genTextSearchSpec(schemas))
+  appDNA.Properties['indexSpec'] = JSON.stringify(genIndexSpec(schemas))
 
   // add the new zome info
   let holodexDNA = JSON.parse(fs.readFileSync('./dna/holodexDNATemplate.json'))
@@ -128,10 +127,17 @@ downloadGitRepo('github:HC-Interns/holodex#template', './dna/', function (err) {
     })
   })
 
+  
+  // remove existing holodex dna entry if one exists
+  appDNA.Zomes = appDNA.Zomes.filter(zome => {
+    return zome.Name !== 'holodex'
+  })
+
   appDNA.Zomes.push(holodexDNA)
 
   // write the dna to replace the old file
   fs.writeFileSync('./dna/dna.json', JSON.stringify(appDNA, null, 2), 'utf8')
 
   // done!
+  console.log("Sucess!")
 })
