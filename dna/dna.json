@@ -1,39 +1,29 @@
 {
   "Version": 1,
   "UUID": "2ef9fa48-2a33-424f-a4bf-b0591b2a71d8",
-  "Name": "holodex",
+  "Name": "querysearch",
+
   "Properties": {
     "description": "A pluggable app for other holochain based apps for enabling indexing",
-    "language": "en",
-    "textSearchSpec" : "{\"record\" : {\"indexFields\": [{\"fieldName\": \"title\", \"weight\": 2.0}, {\"fieldName\": \"body.text\", \"weight\": 1.0}]}}",
-    "indexSpec" : "{\"record\" : [\"upvotes\", \"body.text\"]}"
+    "language": "en"
   },
+
   "PropertiesSchemaFile": "properties_schema.json",
   "DHTConfig": {
     "HashType": "sha2-256"
   },
   "Zomes": [
     {
-      "Name": "holodex",
+      "Name": "querysearch",
       "Description": "Generic indexing functions provision",
       "RibosomeType": "js",
-      "CodeFile": "holodex.js",
+      "CodeFile": "querysearch.js",
       "Config": {
         "ErrorHandling": "throwErrors"
       },
       "Functions": [
         {
-          "Name": "indexKeyword",
-          "CallingType": "json",
-          "Exposure": "public"
-        },
-        {
           "Name": "index",
-          "CallingType": "json",
-          "Exposure": "public"
-        },
-        {
-          "Name": "queryHD",
           "CallingType": "json",
           "Exposure": "public"
         },
@@ -44,7 +34,7 @@
         }
       ],
       "BridgeFuncs": [
-        "indexKeyword",
+        "index",
         "search"
       ],
       "Entries" : [
@@ -55,16 +45,15 @@
           "Sharing": "public"
         },
         {
-          "Name": "skel_record",
-          "DataFormat": "json",
-          "SchemaFile": "skel_record.json",
-          "Sharing": "public"
+          "Name" : "keywordLinks",
+          "DataFormat" : "links",
+          "Sharing" : "public"
         }
       ]
     },
     {
       "Name": "consumer",
-      "Description": "Example zome consuming holodex",
+      "Description": "Example zome consuming querysearch",
       "RibosomeType": "js",
       "CodeFile": "consumer.js",
       "Config": {

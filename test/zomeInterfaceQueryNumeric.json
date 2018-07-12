@@ -10,7 +10,7 @@
         },
         {
             "Convey":"Can call index on the resulting hash",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "index",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
@@ -19,7 +19,7 @@
 
         {
             "Convey":"Can call queryHD with a query that returns nothing",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Input" : {"entryType" : "record", "queryOptions" : {"Field" : "upvotes", "Constrain" : {"EQ" : 3}}},
             "Output": [],
@@ -27,7 +27,7 @@
         },
         {
             "Convey":"Can match result using equality query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {EQ : 14}}}).indexOf(%result0%) > -1",
@@ -36,7 +36,7 @@
         },
         {
             "Convey":"Can match result using less than query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {LT : 20}}}).indexOf(%result0%) > -1",
@@ -45,7 +45,7 @@
         },
         {
             "Convey":"Can match result using greater than query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {GT : 5}}}).indexOf(%result0%) > -1",
@@ -63,7 +63,7 @@
         },
         {
             "Convey":"Can index the new record",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "index",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
@@ -72,7 +72,7 @@
 
         {
             "Convey":"Can match exactly one result using equality query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {EQ : 14}}}).length === 1",
@@ -81,7 +81,7 @@
         },
         {
             "Convey":"Can match multiple result using less than query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {LT : 20}}}).length === 2",
@@ -90,7 +90,7 @@
         },
         {
             "Convey":"Can match multiple result using greater than query",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "queryHD",
             "Raw" : true,
             "Input" : "queryHD({entryType : 'record', queryOptions : {Field : 'upvotes', Constrain : {GT : 2}}}).length === 2",

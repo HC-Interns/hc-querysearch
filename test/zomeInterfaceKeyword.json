@@ -10,7 +10,7 @@
         },
         {
             "Convey":"Can call indexKeyword on the resulting hash",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "indexKeyword",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
@@ -20,7 +20,7 @@
 
         {
             "Convey":"Can call search with no useful keywords",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Input" : {"entryType" : "record", "queryString" : "q x z"},
             "Output": {},
@@ -28,7 +28,7 @@
         },
         {
             "Convey":"Can call search with keyword that was in the body",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Raw" : true,
             "Input" : "search({entryType : 'record', queryString : 'text'})[%result0%]",
@@ -37,7 +37,7 @@
         },
         {
             "Convey":"Can call search with keyword that was in the title",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Raw" : true,
             "Input" : "search({entryType : 'record', queryString : 'title'})[%result0%]",
@@ -46,7 +46,7 @@
         },
         {
             "Convey":"Can call search with keyword that is in both. Weight is the sum",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Raw" : true,
             "Input" : "search({entryType : 'record', queryString : 'record'})[%result0%]",
@@ -64,7 +64,7 @@
         },
         {
             "Convey":"Can call index on the resulting hash",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "indexKeyword",
             "Input" : {"entryType" : "record", "entryHash" : "%h%"},
             "Output": true,
@@ -72,7 +72,7 @@
         },
         {
             "Convey":"Can call search with that is only in the second entry",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Raw" : true,
             "Input" : "Object.keys(search({entryType : 'record', queryString : 'shazam'})).length",
@@ -81,7 +81,7 @@
         },
         {
             "Convey":"Can call search with keywords in both. Returns both",
-            "Zome": "holodex",
+            "Zome": "querysearch",
             "FnName": "search",
             "Raw" : true,
             "Input" : "Object.keys(search({entryType : 'record', queryString : 'record'})).length",

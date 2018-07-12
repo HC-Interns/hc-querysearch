@@ -1,26 +1,30 @@
 {
-  "name": "holodex",
+  "name": "querysearch",
   "version": "1.0.0",
   "description": "Holochain application indexing engine for distributed apps which run on holochains",
   "scripts": {
     "test": "cd build && hcdev test; cd ..",
-    "build": "./build.sh"
+    "build": "babel dna_src --out-file dna/querysearch/querysearch.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HC-Interns/holodex.git"
+    "url": "git+https://github.com/HC-Interns/querysearch.git"
   },
   "author": "Holo Interns 2018",
-  "license": "GPL3",
+  "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/HC-Interns/holodex/issues"
+    "url": "https://github.com/HC-Interns/querysearch/issues"
   },
-  "homepage": "https://github.com/HC-Interns/holodex#readme",
+  "homepage": "https://github.com/HC-Interns/querysearch#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "copyfiles": "^2.0.0",
     "tape": "^4.9.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  }
 }

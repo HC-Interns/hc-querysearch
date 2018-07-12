@@ -1,6 +1,6 @@
-const sp = require('../src_dna/holodex/string-processing'),
-      BaseStemmer = require('../src_dna/holodex/base-stemmer'),
-      Stemmer = require('../src_dna/holodex/english-stemmer'),
+const sp = require('../src_dna/querysearch/string-processing'),
+      BaseStemmer = require('../src_dna/querysearch/base-stemmer'),
+      Stemmer = require('../src_dna/querysearch/english-stemmer'),
       test = require('tape')
 
 // tests for tidy

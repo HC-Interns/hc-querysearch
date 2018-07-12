@@ -21,7 +21,7 @@ function genSkeletalSchema(schema) {
     indexFields: []
   }
 
-  let indexFields = schema.holodexIndexFields || []
+  let indexFields = schema.querysearchIndexFields || []
   indexFields.forEach(fieldSpec => {
     if (fieldSpec.type === "ordinal") {
       console.log("Generating skeleton schema for "+schema.name)
@@ -41,7 +41,7 @@ function genTextSearchSpec(schemas) {
   let specs = {}
   schemas.forEach(schema => {
     specs[schema.name] = {fields: []}
-    let indexFields = schema.holodexIndexFields || []
+    let indexFields = schema.querysearchIndexFields || []
     indexFields.forEach(fieldSpec => {
       if(fieldSpec.type === 'textSearch') {
         console.log('Generating keyword search for '+schema.name+'.'+fieldSpec.field)
@@ -59,7 +59,7 @@ function genIndexSpec(schemas) {
   let specs = {}
   schemas.forEach(schema => {
     specs[schema.name] = []
-    let indexFields = schema.holodexIndexFields || []
+    let indexFields = schema.querysearchIndexFields || []
     indexFields.forEach(fieldSpec => {
       if(fieldSpec.type === 'ordinal') {
         specs[schema.name].push(fieldSpec.field)
@@ -73,14 +73,14 @@ function genIndexSpec(schemas) {
 
 ////// Script steps (zome style!) Script must be run from app root dir (one that contains dna dir)
 
-// check there is not already a holodex directory in dna
-if (fs.existsSync('dna/holodex')) {
+// check there is not already a querysearch directory in dna
+if (fs.existsSync('dna/querysearch')) {
   console.error('Holodex directory already present in dna! Delete it if you wish to reinstall. Aborting')
   process.exit(1)
 }
 
-// copy holodex across
-fs.copySync('node_modules/holochain-init-querysearch/holodex', 'dna/holodex')
+// copy querysearch across
+fs.copySync('node_modules/holochain-init-querysearch/querysearch', 'dna/querysearch')
 
 // // load the existing app DNA
 let appDNA = JSON.parse(fs.readFileSync('dna/dna.json'))
@@ -88,7 +88,7 @@ let appDNA = JSON.parse(fs.readFileSync('dna/dna.json'))
 // generate the objects for the skeleton entries and things to be added to the DNA
 let schemas = []
 appDNA.Zomes.forEach(zome => {
-  if (zome.Name === 'holodex') { return }
+  if (zome.Name === 'querysearch') { return }
   zome.Entries.forEach(entry => {
     if (entry.SchemaFile) {
       let schema = JSON.parse(fs.readFileSync('dna/'+zome.Name+'/'+entry.SchemaFile))
@@ -105,13 +105,13 @@ appDNA.Properties['textSearchSpec'] = JSON.stringify(genTextSearchSpec(schemas))
 appDNA.Properties['indexSpec'] = JSON.stringify(genIndexSpec(schemas))
 
 // add the new zome info
-let holodexDNA = JSON.parse(fs.readFileSync('node_modules/holochain-init-querysearch/holodexDNATemplate.json'))
+let querysearchDNA = JSON.parse(fs.readFileSync('node_modules/holochain-init-querysearch/querysearchDNATemplate.json'))
 
 skeletonSchemas.forEach(schema => {
   // write the schema json
-  fs.writeFileSync('dna/holodex/'+schema.name+'.json', JSON.stringify(schema, null, 2), 'utf8')
-  // add to the holodexDNA entry
-  holodexDNA.Entries.push({
+  fs.writeFileSync('dna/querysearch/'+schema.name+'.json', JSON.stringify(schema, null, 2), 'utf8')
+  // add to the querysearchDNA entry
+  querysearchDNA.Entries.push({
     Name: schema.name,
     DataFormat: "json",
     SchemaFile: schema.name+'.json',
@@ -120,12 +120,12 @@ skeletonSchemas.forEach(schema => {
 })
 
 
-// remove existing holodex dna entry if one exists
+// remove existing querysearch dna entry if one exists
 appDNA.Zomes = appDNA.Zomes.filter(zome => {
-  return zome.Name !== 'holodex'
+  return zome.Name !== 'querysearch'
 })
 
-appDNA.Zomes.push(holodexDNA)
+appDNA.Zomes.push(querysearchDNA)
 
 // write the dna to replace the old file
 fs.writeFileSync('dna/dna.json', JSON.stringify(appDNA, null, 2), 'utf8')

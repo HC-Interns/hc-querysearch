@@ -1,8 +1,8 @@
     {
-      "Name": "holodex",
+      "Name": "querysearch",
       "Description": "Generic indexing functions provision",
       "RibosomeType": "js",
-      "CodeFile": "holodex.js",
+      "CodeFile": "querysearch.js",
       "Config": {
         "ErrorHandling": "throwErrors"
       },
