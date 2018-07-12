@@ -1,0 +1,19 @@
+{
+  "name" : "record",
+  "type" : "object",
+  "properties" : {
+    "title" : {"type" : "string"},
+    "body" : {
+      "type" : "object",
+      "properties" : {
+        "text" : {"type" : "string"}
+      }
+    },
+    "upvotes" : {"type" : "integer"}
+  },
+  "holodexIndexFields": [
+    {"field" : "upvotes", "type": "ordinal", "ascending" : true},
+    {"field" : "title", "type" : "textSearch", "weight" : 2.0},
+    {"field" : "body.text", "type" : "textSearch", "weight" : 1.0}
+  ]
+}
