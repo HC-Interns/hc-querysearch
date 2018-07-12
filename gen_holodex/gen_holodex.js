@@ -79,56 +79,59 @@ function AddHolodexDNAProperties(properties, AppUUID, schemas) {
 
 ////// Script steps (zome style!) Script must be run from app root dir (one that contains dna dir)
 
-// // load the existing app DNA
-let appDNA = JSON.parse(fs.readFileSync('./dna/dna.json'))
 
-// generate the objects for the skeleton entries and things to be added to the DNA
-let schemas = []
-appDNA.Zomes.forEach(zome => {
-  zome.Entries.forEach(entry => {
-    if (entry.SchemaFile) {
-      let schema = JSON.parse(fs.readFileSync('./dna/'+zome.Name+'/'+entry.SchemaFile))
-      schemas.push(schema)
-    }
-  })
-})
-
-let skeletonSchemas = schemas.map(genSkeletalSchema)
-console.log(JSON.stringify(skeletonSchemas))
-
-let textSearchSpec = genTextSearchSpec(schemas)
-let indexSpec = genIndexSpec(schemas)
 
 
 // get an instance of Holodex zome edition from github (placeholder for now)
 downloadGitRepo('github:HC-Interns/holodex#template', './dna/', function (err) {
   console.log(err ? 'Error downloading template from repo' : 'Success')
-})
 
 
-//// update dna json
-// write the new stuff to properties
-appDNA.Properties['textSearchSpec'] = genTextSearchSpec(schemas)
-appDNA.Properties['indexSpec'] = genIndexSpec(schemas)
+  // // load the existing app DNA
+  let appDNA = JSON.parse(fs.readFileSync('./dna/dna.json'))
 
-// add the new zome info
-let holodexDNA = JSON.parse(fs.readFileSync('./holodexDNATemplate.json'))
-
-skeletonSchemas.forEach(schema => {
-  // write the schema json
-  fs.writeFileSync('./dna/holodex/'+schema.name+'.json', JSON.stringify(schema, null, 2), 'utf8')
-  // add to the holodexDNA entry
-  holodexDNA.Entries.push({
-    Name: schema.name,
-    DataFormat: "json",
-    SchemaFile: schema.name+'.json',
-    Sharing: "public"
+  // generate the objects for the skeleton entries and things to be added to the DNA
+  let schemas = []
+  appDNA.Zomes.forEach(zome => {
+    zome.Entries.forEach(entry => {
+      if (entry.SchemaFile) {
+        let schema = JSON.parse(fs.readFileSync('./dna/'+zome.Name+'/'+entry.SchemaFile))
+        schemas.push(schema)
+      }
+    })
   })
+
+  let skeletonSchemas = schemas.map(genSkeletalSchema)
+  console.log(JSON.stringify(skeletonSchemas))
+
+  let textSearchSpec = genTextSearchSpec(schemas)
+  let indexSpec = genIndexSpec(schemas)
+
+
+  //// update dna json
+  // write the new stuff to properties
+  appDNA.Properties['textSearchSpec'] = genTextSearchSpec(schemas)
+  appDNA.Properties['indexSpec'] = genIndexSpec(schemas)
+
+  // add the new zome info
+  let holodexDNA = JSON.parse(fs.readFileSync('./dna/holodexDNATemplate.json'))
+
+  skeletonSchemas.forEach(schema => {
+    // write the schema json
+    fs.writeFileSync('./dna/holodex/'+schema.name+'.json', JSON.stringify(schema, null, 2), 'utf8')
+    // add to the holodexDNA entry
+    holodexDNA.Entries.push({
+      Name: schema.name,
+      DataFormat: "json",
+      SchemaFile: schema.name+'.json',
+      Sharing: "public"
+    })
+  })
+
+  appDNA.Zomes.push(holodexDNA)
+
+  // write the dna to replace the old file
+  fs.writeFileSync('./dna/dna.json', JSON.stringify(appDNA, null, 2), 'utf8')
+
+  // done!
 })
-
-appDNA.Zomes.push(holodexDNA)
-
-// write the dna to replace the old file
-fs.writeFileSync('./dna.json', JSON.stringify(appDNA, null, 2), 'utf8')
-
-// done!

@@ -1,0 +1,20 @@
+{
+  "name": "skel_record",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "body_text": {
+      "type": "string"
+    }
+  },
+  "indexFields": [
+    {
+      "title": 1
+    },
+    {
+      "body_text": 1
+    }
+  ]
+}
