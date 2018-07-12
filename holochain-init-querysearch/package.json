@@ -1,0 +1,14 @@
+{
+  "name": "holochain-init-querysearch",
+  "version": "1.0.0",
+  "description": "A package for adding query and text search functionality to a holochain app",
+  "main": "gen_holodex.js",
+  "bin": {
+    "holochain-init-querysearch": "./gen_holodex.js"
+  },
+  "author": "",
+  "license": "GPL3",
+  "dependencies": {
+    "fs-extra": "^6.0.1"
+  }
+}
