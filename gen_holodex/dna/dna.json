@@ -1,0 +1,44 @@
+{
+  "Version": 1,
+  "UUID": "2ef9fa48-2a33-424f-a4bf-b0591b2a71d8",
+  "Name": "holodex",
+  "Properties": {
+    "description": "A pluggable app for other holochain based apps for enabling indexing",
+    "language": "en"
+  },
+  "PropertiesSchemaFile": "properties_schema.json",
+  "DHTConfig": {
+    "HashType": "sha2-256"
+  },
+  "Zomes": [
+    {
+      "Name": "consumer",
+      "Description": "Example zome consuming holodex",
+      "RibosomeType": "js",
+      "CodeFile": "consumer.js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
+      },
+      "Functions": [
+        {
+          "Name": "addRecord",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "addRecordAndIndex",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ],
+      "Entries" : [
+        {
+          "Name": "record",
+          "DataFormat": "json",
+          "SchemaFile": "record.json",
+          "Sharing": "public"
+        }
+      ]
+    }
+  ]
+}
