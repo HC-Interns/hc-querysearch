@@ -6,5 +6,6 @@
         "entryType" : {"type" : "string"},
         "fieldName" : {"type" : "string"}
     },
-    "required" : ["keyword", "entryType", "field"]
+    "required" : ["keyword", "entryType", "field"],
+    "indexFields" : [{"keyword" : 1}]
 }

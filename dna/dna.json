@@ -28,6 +28,16 @@
           "Exposure": "public"
         },
         {
+          "Name": "indexKeyword",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "queryHD",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
           "Name": "search",
           "CallingType": "json",
           "Exposure": "public"
